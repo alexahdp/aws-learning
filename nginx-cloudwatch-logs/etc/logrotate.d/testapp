@@ -1,0 +1,11 @@
+/home/www/appexample/logs/*.log {
+  rotate 5
+  monthly
+  compress
+  missingok
+  notifempty
+  create 0640 www www
+  postrotate
+		pm2 sendSignal SIGUSR2 appexample
+	endscript
+}
