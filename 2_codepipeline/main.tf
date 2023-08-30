@@ -119,7 +119,7 @@ resource "aws_iam_role" "example_codebuild_project_role" {
 }
 
 resource "aws_iam_policy" "codebuild_write_cloudwatch_policy" {
-  name        = "appexample-dev-codebuild-policy-us-west-1"
+  name        = "appexample-dev-codebuild-policy-us-east-1"
   description = "A policy for codebuild to write to cloudwatch"
   policy = jsonencode({
     "Version": "2012-10-17",
@@ -217,7 +217,7 @@ resource "aws_s3_bucket_versioning" "build_artifacts_bucket_versioning" {
 }
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "appexample-dev-codepipeline-bucket-us-west-1"
+  bucket = "appexample-dev-codepipeline-bucket-us-east-1"
 }
 
 resource "aws_s3_bucket_versioning" "codepipeline_bucket_versioning" {
@@ -309,7 +309,7 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
 # ==================== CodeBuild ====================
 
 resource "aws_codebuild_project" "example_codebuild_project" {
-  name          = "appexample-dev-codebuild-us-west-1"
+  name          = "appexample-dev-codebuild-us-east-1"
   description   = "Codebuild for appexample-dev"
   build_timeout = "30"
   service_role  = aws_iam_role.example_codebuild_project_role.arn
@@ -342,7 +342,7 @@ resource "aws_codestarconnections_connection" "codestar_connection_example" {
 # ==================== CodePipeline ====================
 
 resource "aws_codepipeline" "pipeline" {
-  name     = "appexample-dev-codepipeline-us-west-1"
+  name     = "appexample-dev-codepipeline-us-east-1"
   role_arn = aws_iam_role.codepipeline_role.arn
   artifact_store {
     location = aws_s3_bucket.codepipeline_bucket.bucket

@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /home/www/app
+    overwrite: true
+file_exists_behavior: OVERWRITE
+permissions:
+  - object: /home/www/appexample
+    pattern: '**'
+    owner: ec2-user
+    group: ec2-user
+    mode: 644
+    type:
+      - file
+      - directory
+hooks:
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: www
